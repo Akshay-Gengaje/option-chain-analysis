@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import apiClient, { setAuthCookie, initializeCookies } from "../api/axiosClient";  // Import both functions
+import apiClient, {
+  setAuthCookie,
+  initializeCookies,
+} from "../api/axiosClient"; // Import both functions
 import axios from "axios";
 
 // Create Context
@@ -21,7 +24,7 @@ export const OptionChainProvider = ({ children }) => {
 
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:8000/api/option-chain-indices", {
+      const response = await axios.get("/api/option-chain-indices", {
         params: { symbol },
       });
       setUnderlying(response.data.records?.underlyingValue || 0);
@@ -59,7 +62,9 @@ export const OptionChainProvider = ({ children }) => {
 export const useOptionChain = () => {
   const context = useContext(OptionChainContext);
   if (!context) {
-    throw new Error("useOptionChain must be used within an OptionChainProvider");
+    throw new Error(
+      "useOptionChain must be used within an OptionChainProvider"
+    );
   }
   return context;
 };
