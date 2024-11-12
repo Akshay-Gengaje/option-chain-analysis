@@ -1,19 +1,37 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import OptionChain from "./pages/OptionChain";
-import Navbar from "./components/nav/Navbar";
-import OptionAnalysis from "./components/option-analysis/OptionAnalysis";
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import LoginButton from "./components/Login/LogginButton";
+import RedirectHandler from "./components/Login/RedirectHandler";
+import Dashboard from "./components/Dashboard/Dashboard";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<OptionAnalysis />} />
-          <Route path="/optionChain" element={<OptionChain />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <Router>
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<LoginButton />} />
+        <Route path="/auth/callback" element={<RedirectHandler />} />
+
+        {/* Protected Route for authenticated users only */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Redirect all other paths to login */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
 }
 
