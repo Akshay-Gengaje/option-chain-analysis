@@ -45,7 +45,7 @@ const OptionChain = () => {
     0;
   return (
     <div className=" px-4 py-2 w-full">
-      <div className="flex  items-center">
+      <div className="flex items-center">
         <OptionSelector
           expiryData={expiryData}
           selectedIndex={selectedIndex}
@@ -65,7 +65,7 @@ const OptionChain = () => {
         </div>
       </div>
       {error && <p className="text-red-500 text-center mt-4">{error}</p>}
-      <div className="lg:flex  w-full lg:justify-evenly">
+      <div className="lg:flex w-full lg:justify-evenly">
         <OptionTable
           optionsData={callOptionsData}
           ATM={ATM}

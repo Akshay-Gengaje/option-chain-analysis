@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import apiClient from "../../api/apiClient";
 import { useMarketDataFeed } from "../MarketData/MarketData";
+import LiveFeedCard from "../LiveFeed/LiveFeedCard";
 
 const Navbar = () => {
   const [userProfile, setUserProfile] = useState(null);
@@ -8,6 +9,7 @@ const Navbar = () => {
   const [error, setError] = useState("");
   const { isConnected, price: nifty } = useMarketDataFeed("NSE_INDEX|Nifty 50");
   const { price: bank } = useMarketDataFeed("NSE_INDEX|Nifty Bank");
+  console.log(nifty);
   // Fetch User Profile and Funds Data on mount
   useEffect(() => {
     const fetchData = async () => {
@@ -39,16 +41,14 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 bg-gray-800 text-white p-2  w-full ">
-      <div className="container mx-auto flex justify-between items-center">
+      <div className=" mx-auto flex justify-between items-center h-12">
         <div className="text-2xl font-bold">
           <h3>Upstox</h3>
         </div>
 
-        <div className="flex ">
-          <div className="flex w-96 gap-10">
-            <p>Nifty - {nifty || 0}</p>
-            <p>Bank Nifty - {bank || 0}</p>
-          </div>
+        <div className="flex gap-16">
+          <LiveFeedCard price={nifty} name={"Nifty 50"} />
+          <LiveFeedCard price={bank} name={"Nifty Bank"} />
           <div className="flex items-center gap-1">
             <div
               className={`${

@@ -51,7 +51,8 @@ const decodeProtobuf = (buffer) => {
   const message = FeedResponse.decode(buffer);
   const feeds = message.feeds;
   const instrumentKey = Object.keys(feeds)[0];
-  return feeds[instrumentKey]?.ff?.indexFF?.ltpc?.ltp ?? null;
+  // console.log(feeds[instrumentKey]?.ff?.indexFF?.ltpc?.cp);
+  return feeds[instrumentKey]?.ff?.indexFF?.ltpc ?? null;
 };
 
 export const useMarketDataFeed = (instrumentKey) => {

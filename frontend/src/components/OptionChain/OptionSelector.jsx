@@ -61,7 +61,7 @@ function OptionSelector({
   };
 
   return (
-    <div className="p-6 w-full mx-auto flex md:flex-row  md:gap-10 items-center flex-col">
+    <div className="px-6 py-3 w-full mx-auto flex md:flex-row  md:gap-10 items-center flex-col">
       <div className="mb-4">
         <label
           htmlFor="index"

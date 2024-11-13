@@ -9,6 +9,7 @@ import LoginButton from "./components/Login/LogginButton";
 import RedirectHandler from "./components/Login/RedirectHandler";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ProtectedRoute from "./ProtectedRoute";
+import BankniftyHeatMap from "./components/HeatMap/BankniftyHeatMap";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           path="/dashboard"
           element={
             <ProtectedRoute>
+              <BankniftyHeatMap />
               <Dashboard />
             </ProtectedRoute>
           }
