@@ -24,7 +24,15 @@ const calculateChangeColor = (value, max, colorPositive, colorNegative) => {
   return ""; // No color for zero change
 };
 
-const OptionTable = ({ optionsData, type, ATM }) => {
+const OptionTable = ({
+  optionsData,
+  type,
+  ATM,
+  callTotalChangeInOI,
+  putTotalChangeInOI,
+  callChangeInOIPercent,
+  putChangeInOIPercent,
+}) => {
   // Calculate min/max for Open Interest and Change in OI
   const oiValues = optionsData.map((option) => option?.market_data?.oi || 0);
   const changeInOIValues = optionsData.map(
@@ -156,10 +164,14 @@ const OptionTable = ({ optionsData, type, ATM }) => {
               {formatNumber(totalOpenInterest)}
             </td>
             <td className="px-4 py-2 text-sm text-gray-700">
-              {formatNumber(totalChangeInOI)}
+              {type == "Call"
+                ? formatNumber(callTotalChangeInOI)
+                : formatNumber(putTotalChangeInOI)}
             </td>
-            <td className="px-4 py-2"></td>
-            <td className="px-4 py-2"></td>
+            <td className="px-4 py-2">Percentage : </td>
+            <td className="px-4 py-2">
+              {type == "Call" ? callChangeInOIPercent : putChangeInOIPercent}%
+            </td>
           </tr>
         </tbody>
       </table>

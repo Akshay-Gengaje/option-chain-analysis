@@ -22,6 +22,24 @@ const OptionChain = () => {
     optionsData,
     selectedIndex
   );
+
+  const putChangeInOIValues = putOptionsData.map(
+    (option) =>
+      (option?.market_data?.oi || 0) - (option?.market_data?.prev_oi || 0)
+  );
+  const callChangeInOIValues = callOptionsData.map(
+    (option) =>
+      (option?.market_data?.oi || 0) - (option?.market_data?.prev_oi || 0)
+  );
+
+  const putTotalChangeInOI = putChangeInOIValues.reduce((a, b) => a + b, 0);
+  const callTotalChangeInOI = putChangeInOIValues.reduce((a, b) => a + b, 0);
+
+  const callChangeInOIPercent =
+    (callChangeInOIValues / (callChangeInOIValues + putChangeInOIValues)) * 100;
+
+  const putChangeInOIPercent =
+    (putChangeInOIValues / (callChangeInOIValues + putChangeInOIValues)) * 100;
   return (
     <div className=" px-4 py-8 w-full">
       <OptionSelector
@@ -43,8 +61,20 @@ const OptionChain = () => {
       </div>
       {error && <p className="text-red-500 text-center mt-4">{error}</p>}
       <div className="lg:flex  w-full lg:justify-evenly">
-        <OptionTable optionsData={callOptionsData} ATM={ATM} type="Call" />
-        <OptionTable optionsData={putOptionsData} ATM={ATM} type="Put" />
+        <OptionTable
+          optionsData={callOptionsData}
+          ATM={ATM}
+          type="Call"
+          callTotalChangeInOI={callTotalChangeInOI}
+          callChangeInOIPercent={callChangeInOIPercent}
+        />
+        <OptionTable
+          optionsData={putOptionsData}
+          ATM={ATM}
+          type="Put"
+          putTotalChangeInOI={putTotalChangeInOI}
+          putChangeInOIPercent={putChangeInOIPercent}
+        />
       </div>
       {optionsData.length === 0 && !error && (
         <p className="text-center text-gray-500 mt-4">
