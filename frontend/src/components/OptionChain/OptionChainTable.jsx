@@ -170,7 +170,10 @@ const OptionTable = ({
             </td>
             <td className="px-4 py-2">Percentage : </td>
             <td className="px-4 py-2">
-              {type == "Call" ? callChangeInOIPercent : putChangeInOIPercent}%
+              {type == "Call"
+                ? callChangeInOIPercent.toFixed(2)
+                : putChangeInOIPercent.toFixed(2)}
+              %
             </td>
           </tr>
         </tbody>

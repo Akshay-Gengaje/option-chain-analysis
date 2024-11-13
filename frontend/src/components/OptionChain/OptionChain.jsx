@@ -23,23 +23,25 @@ const OptionChain = () => {
     selectedIndex
   );
 
-  const putChangeInOIValues = putOptionsData.map(
-    (option) =>
-      (option?.market_data?.oi || 0) - (option?.market_data?.prev_oi || 0)
-  );
+
   const callChangeInOIValues = callOptionsData.map(
     (option) =>
       (option?.market_data?.oi || 0) - (option?.market_data?.prev_oi || 0)
   );
 
+  const putChangeInOIValues = putOptionsData.map(
+    (option) =>
+      (option?.market_data?.oi || 0) - (option?.market_data?.prev_oi || 0)
+  );
+
+  const callTotalChangeInOI = callChangeInOIValues.reduce((a, b) => a + b, 0);
   const putTotalChangeInOI = putChangeInOIValues.reduce((a, b) => a + b, 0);
-  const callTotalChangeInOI = putChangeInOIValues.reduce((a, b) => a + b, 0);
 
   const callChangeInOIPercent =
-    (callChangeInOIValues / (callChangeInOIValues + putChangeInOIValues)) * 100;
-
+    (callTotalChangeInOI / (callTotalChangeInOI + putTotalChangeInOI)) * 100;
+  console.log(callChangeInOIValues);
   const putChangeInOIPercent =
-    (putChangeInOIValues / (callChangeInOIValues + putChangeInOIValues)) * 100;
+    (putTotalChangeInOI / (callTotalChangeInOI + putTotalChangeInOI)) * 100;
   return (
     <div className=" px-4 py-8 w-full">
       <OptionSelector

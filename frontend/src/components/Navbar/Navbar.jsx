@@ -60,20 +60,18 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="flex items-center space-x-6">
-          {/* Funds Info */}
+        {/* <div className="flex items-center space-x-6">
           <div className="flex flex-col items-end space-y-2">
             <div className="text-sm">
               <strong>Available Margin : </strong>
               <span>{fundsData.equity.available_margin}</span>
             </div>
           </div>
-          {/* User Info */}
           <div className="flex flex-col items-end">
             <span className="text-sm font-medium">{userProfile.user_name}</span>
             <span className="text-sm">{userProfile.email}</span>
           </div>
-        </div>
+        </div> */}
       </div>
     </nav>
   );
