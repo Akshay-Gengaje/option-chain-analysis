@@ -7,7 +7,7 @@ const RedirectHandler = () => {
   const navigate = useNavigate();
   const clientId = import.meta.env.VITE_API_KEY; // Replace with your actual client ID
   const clientSecret = import.meta.env.VITE_API_SECRETE; // Replace with your actual client secret
-  const redirectUri = "http://localhost:5173/auth/callback"; // Replace with your actual redirect URI
+  const redirectUri = import.meta.env.VITE_REDIRECT_URI;
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
