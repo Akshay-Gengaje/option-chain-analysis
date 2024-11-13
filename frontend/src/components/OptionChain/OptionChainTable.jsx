@@ -144,10 +144,10 @@ const OptionTable = ({
                   {formatNumber(changeInOI)}
                 </td>
                 <td className="px-4 py-2 text-sm text-gray-700">
-                  {option?.option_greeks?.delta}
+                  {option?.option_greeks?.delta.toFixed(2)}
                 </td>
                 <td className="px-4 py-2 text-sm text-gray-700">
-                  {option?.option_greeks?.theta}
+                  {option?.option_greeks?.theta.toFixed(2)}
                 </td>
                 {/* <td className="px-4 py-2 text-sm text-gray-700">
                   {option?.option_greeks?.gamma}
@@ -168,7 +168,7 @@ const OptionTable = ({
                 ? formatNumber(callTotalChangeInOI)
                 : formatNumber(putTotalChangeInOI)}
             </td>
-            <td className="px-4 py-2">Percentage : </td>
+            <td className="px-4 py-2">{type == "Call"? "Call %" : "Put %" } </td>
             <td className="px-4 py-2">
               {type == "Call"
                 ? callChangeInOIPercent.toFixed(2)
