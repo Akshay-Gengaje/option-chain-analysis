@@ -12,23 +12,24 @@ const calculateIntensity = (value, min, max, color) => {
 const calculateChangeColor = (value, max, colorPositive, colorNegative) => {
   if (value > 0) {
     const ratio = value / max;
-    return `rgba(${colorPositive[0]}, ${colorPositive[1]}, ${colorPositive[2]}, ${
-      0.3 + 0.7 * ratio
-    })`;
+    return `rgba(${colorPositive[0]}, ${colorPositive[1]}, ${
+      colorPositive[2]
+    }, ${0.3 + 0.7 * ratio})`;
   } else if (value < 0) {
     const ratio = Math.abs(value) / max;
-    return `rgba(${colorNegative[0]}, ${colorNegative[1]}, ${colorNegative[2]}, ${
-      0.3 + 0.7 * ratio
-    })`;
+    return `rgba(${colorNegative[0]}, ${colorNegative[1]}, ${
+      colorNegative[2]
+    }, ${0.3 + 0.7 * ratio})`;
   }
   return ""; // No color for zero change
 };
 
 const OptionTable = ({ optionsData, type, ATM }) => {
   // Calculate min/max for Open Interest and Change in OI
-  const oiValues = optionsData.map(option => option?.market_data?.oi || 0);
+  const oiValues = optionsData.map((option) => option?.market_data?.oi || 0);
   const changeInOIValues = optionsData.map(
-    option => (option?.market_data?.oi || 0) - (option?.market_data?.prev_oi || 0)
+    (option) =>
+      (option?.market_data?.oi || 0) - (option?.market_data?.prev_oi || 0)
   );
 
   const minOI = Math.min(...oiValues);
@@ -49,7 +50,7 @@ const OptionTable = ({ optionsData, type, ATM }) => {
       <table className="min-w-full table-auto bg-white rounded-lg shadow-lg">
         <thead className="bg-gray-100">
           <tr className="text-center bg-green-300 font-bold ">
-            <td colSpan={7}>{`${type} Options`}</td>
+            <td colSpan={6}>{`${type} Options`}</td>
           </tr>
           <tr className="bg-green-200">
             <th className="px-4 py-2 text-center text-sm font-semibold text-gray-600">
@@ -65,7 +66,7 @@ const OptionTable = ({ optionsData, type, ATM }) => {
               Change In OI
             </th>
             <th
-              colSpan={3}
+              colSpan={2}
               className="px-4 py-2 text-center text-sm font-semibold text-gray-600"
             >
               Option Greeks
@@ -82,15 +83,16 @@ const OptionTable = ({ optionsData, type, ATM }) => {
             <th className="px-4 py-2 text-center text-sm font-semibold text-gray-600">
               Theta
             </th>
-            <th className="px-4 py-2 text-center text-sm font-semibold text-gray-600">
+            {/* <th className="px-4 py-2 text-center text-sm font-semibold text-gray-600">
               Gamma
-            </th>
+            </th> */}
           </tr>
         </thead>
         <tbody className="text-center">
           {optionsData.map((option, index) => {
             const openInterest = option?.market_data?.oi || 0;
-            const changeInOI = openInterest - (option?.market_data?.prev_oi || 0);
+            const changeInOI =
+              openInterest - (option?.market_data?.prev_oi || 0);
 
             return (
               <tr
@@ -139,9 +141,9 @@ const OptionTable = ({ optionsData, type, ATM }) => {
                 <td className="px-4 py-2 text-sm text-gray-700">
                   {option?.option_greeks?.theta}
                 </td>
-                <td className="px-4 py-2 text-sm text-gray-700">
+                {/* <td className="px-4 py-2 text-sm text-gray-700">
                   {option?.option_greeks?.gamma}
-                </td>
+                </td> */}
               </tr>
             );
           })}
@@ -156,7 +158,6 @@ const OptionTable = ({ optionsData, type, ATM }) => {
             <td className="px-4 py-2 text-sm text-gray-700">
               {formatNumber(totalChangeInOI)}
             </td>
-            <td className="px-4 py-2"></td>
             <td className="px-4 py-2"></td>
             <td className="px-4 py-2"></td>
           </tr>

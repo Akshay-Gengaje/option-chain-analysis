@@ -42,7 +42,10 @@ function OptionSelector({
 
     // Update the expiry date and fetch options contracts
     setSelectedExpiryDate(newSelectedExpiryDate);
-    fetchOptionsContracts({ name: selectedIndexValue, instrument_key }, newSelectedExpiryDate);
+    fetchOptionsContracts(
+      { name: selectedIndexValue, instrument_key },
+      newSelectedExpiryDate
+    );
   };
 
   // Handle expiry date change
@@ -58,7 +61,7 @@ function OptionSelector({
   };
 
   return (
-    <div className="p-6 max-w-md mx-auto flex gap-10 items-center">
+    <div className="p-6 w-full mx-auto flex md:flex-row  md:gap-10 items-center flex-col">
       <div className="mb-4">
         <label
           htmlFor="index"

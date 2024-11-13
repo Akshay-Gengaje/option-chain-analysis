@@ -8,8 +8,6 @@ const Navbar = () => {
   const [error, setError] = useState("");
   const { isConnected, price: nifty } = useMarketDataFeed("NSE_INDEX|Nifty 50");
   const { price: bank } = useMarketDataFeed("NSE_INDEX|Nifty Bank");
-  const { price: gold } = useMarketDataFeed("MCX_FO|434271");
-  console.log(gold);
   // Fetch User Profile and Funds Data on mount
   useEffect(() => {
     const fetchData = async () => {
@@ -50,7 +48,6 @@ const Navbar = () => {
           <div className="flex w-96 gap-10">
             <p>Nifty - {nifty || 0}</p>
             <p>Bank Nifty - {bank || 0}</p>
-            <p>Gold - {gold || 0}</p>
           </div>
           <div className="flex items-center gap-1">
             <div
