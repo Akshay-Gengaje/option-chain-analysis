@@ -3,7 +3,7 @@ import React from "react";
 
 const LoginButton = () => {
   const clientId = import.meta.env.VITE_API_KEY;
-  const redirectUri = "http://localhost:5173/auth/callback"; // Replace with your redirect URI
+  const redirectUri = import.meta.env.VITE_REDIRECT_URI; // Dynamically set based on environment
   const authUrl = `https://api.upstox.com/v2/login/authorization/dialog?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
 
   const handleLogin = () => {
